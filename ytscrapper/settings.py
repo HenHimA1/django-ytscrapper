@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-vqppfd@^@e+vu@@51t2(vz%y7el%7e)!1w--_w%8cnd4o_4-!9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -125,3 +125,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Library Admin",
+    "welcome_sign": "Register here"
+}
