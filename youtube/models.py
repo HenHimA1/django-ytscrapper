@@ -21,11 +21,14 @@ class YouTubeVideo(models.Model):
 class CategoryParaphraseVideo(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 class ParaphraseVideo(models.Model):
     title = models.CharField(max_length=100)
     video = models.ForeignKey(YouTubeVideo, on_delete=models.CASCADE)
     content = models.TextField()
-    tags = models.CharField(max_length=100)
+    tags = models.TextField()
     category = models.ForeignKey(CategoryParaphraseVideo, blank=True, null=True, on_delete=models.CASCADE)
     excerpt = models.TextField()
     featured_image = models.CharField(max_length=200, null=True, blank=True)
