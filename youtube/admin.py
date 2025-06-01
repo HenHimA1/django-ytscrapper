@@ -1,6 +1,6 @@
 from django.contrib import admin
 from pytubefix import YouTube
-from .models import YouTubeVideo
+from .models import YouTubeVideo, ParaphraseLink, ParaphraseVideo
 from import_export.admin import ImportExportMixin
 
 @admin.register(YouTubeVideo)
@@ -27,3 +27,11 @@ class YouTubeVideoAdmin(ImportExportMixin, admin.ModelAdmin):
             except Exception as e:
                 modeladmin.message_user(request, f"Failed {record.url}: {e}")
         modeladmin.message_user(request, "Download complete")
+
+@admin.register(ParaphraseVideo)
+class ParaphraseVideoAdmin(admin.ModelAdmin):
+    list_display = ["title", "category", "tags"]
+
+@admin.register(ParaphraseLink)
+class ParaphraseLinkAdmin(admin.ModelAdmin):
+    list_display = ["url"]
