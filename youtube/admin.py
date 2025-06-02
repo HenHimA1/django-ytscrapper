@@ -2,7 +2,7 @@ import json
 import requests
 from django.contrib import admin, messages
 from pytubefix import YouTube
-from .models import YouTubeVideo, ParaphraseLink, ParaphraseVideo
+from .models import YouTubeVideo, ParaphraseLink
 from import_export.admin import ImportExportMixin
 
 @admin.register(YouTubeVideo)
@@ -12,6 +12,9 @@ class YouTubeVideoAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ('url', 'title', 'views', 'uploaded_at')
     search_fields = ('url', 'title')
     ordering = ["-views"]
+    fieldsets = [["URL", {"fields": ["url"]}], 
+                 ["Content", {"fields": ["title", "channel_url", "views", "likes", "description", "subtitle"]}],
+                 ["Paraphrase", {"fields": ["para_title", "para_featured_image", "para_category", "para_tags", "para_excerpt", "para_content"]}],]
 
     def create_paraphrase(modeladmin, request, queryset):
         for record in queryset:
@@ -44,11 +47,6 @@ class YouTubeVideoAdmin(ImportExportMixin, admin.ModelAdmin):
             except Exception as e:
                 modeladmin.message_user(request, f"Failed {record.url}: {e}")
         modeladmin.message_user(request, "Download complete", level=messages.SUCCESS)
-
-@admin.register(ParaphraseVideo)
-class ParaphraseVideoAdmin(admin.ModelAdmin):
-    search_fields = ['title', 'tags']
-    list_display = ["title", "category", "tags"]
 
 @admin.register(ParaphraseLink)
 class ParaphraseLinkAdmin(admin.ModelAdmin):
