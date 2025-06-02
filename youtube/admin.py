@@ -9,7 +9,7 @@ from import_export.admin import ImportExportMixin
 class YouTubeVideoAdmin(ImportExportMixin, admin.ModelAdmin):
     actions = ["download_subtitle", "create_paraphrase"]
     list_filter = ["title", "channel_url"]
-    list_display = ('url', 'title', 'views', 'uploaded_at')
+    list_display = ('url', 'title', 'views', 'uploaded_at', 'done_paraphrase')
     search_fields = ('url', 'title')
     ordering = ["-views"]
     fieldsets = [["URL", {"fields": ["url"]}], 

@@ -9,7 +9,8 @@ class YouTubeVideo(models.Model):
     subtitle = models.TextField(blank=True)
     views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
-
+    done_paraphrase = models.BooleanField(default=False)
+    
     para_title = models.CharField(max_length=100, null=True, blank=True)
     para_content = models.TextField(null=True, blank=True)
     para_tags = models.TextField(null=True, blank=True)
